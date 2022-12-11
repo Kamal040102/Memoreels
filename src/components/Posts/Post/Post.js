@@ -3,8 +3,10 @@ import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward'
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
+import { saveAs } from 'file-saver';
 
 import { likePost, deletePost } from '../../../actions/posts';
 import useStyles from './styles';
@@ -19,6 +21,9 @@ const Post = ({ post, setCurrentId }) => {
       <div className={classes.overlay}>
         <Typography variant="h6">{post.creator}</Typography>
         <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
+      </div>
+      <div className={classes.overlay3}>
+        <Button style={{ color: 'white' }} size="small" onClick={() => saveAs(post.selectedFile, `${post.creator}-${post.title}.jpg`)}><ArrowDownwardIcon fontSize="default" /></Button>
       </div>
       <div className={classes.overlay2}>
         <Button style={{ color: 'white' }} size="small" onClick={() => setCurrentId(post._id)}><MoreHorizIcon fontSize="default" /></Button>
